@@ -274,11 +274,11 @@ export default function Portfolio() {
                 <div className="grid grid-cols-1 gap-8 p-12">
                   {/* Project Image */}
                   <div className="relative">
-                    <div className="aspect-video bg-slate-800 rounded-lg overflow-hidden max-w-3xl mx-auto w-full border border-slate-700">
+                    <div className="aspect-video bg-slate-800 rounded-lg overflow-hidden max-w-3xl mx-auto w-full border border-slate-700 flex items-center justify-center">
                       <img
                         src={projects[currentProject].image}
                         alt={projects[currentProject].title}
-                        className="w-full h-full object-cover"
+                        className="max-w-full max-h-full object-contain"
                         onError={(e) => {
                           e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWUzNGVhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzlhYTZhYiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg==';
                         }}
