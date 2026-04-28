@@ -419,12 +419,12 @@ export default function Portfolio() {
           </div>
           <div className="flex flex-col sm:flex-row gap-8 text-base md:text-lg tracking-[0.3em] text-slate-400">
             <a href="https://github.com/luis4321-yo" className="hover:text-teal-300 transition-colors flex items-center gap-4">
-              <img src="/github-removebg-preview.png" alt="GitHub" className="w-8 h-8 brightness-0 invert" />
+              <img src="/github.png" alt="GitHub" className="w-8 h-8 brightness-0 invert" />
               <span>:</span>
               <span>luis4321-yo</span>
             </a>
             <a href="mailto:atencioluis206@gmail.com" className="hover:text-teal-300 transition-colors flex items-center gap-4">
-              <img src="/gmail-removebg-preview.png" alt="Email" className="w-8 h-8" />
+              <img src="/gmail.png" alt="Email" className="w-8 h-8" />
               <span>:</span>
               <span>atencioluis206@gmail.com</span>
             </a>
