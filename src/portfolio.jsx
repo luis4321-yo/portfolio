@@ -13,19 +13,17 @@ export default function Portfolio() {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Build particles — density scales with screen size
     const particleCount = Math.min(280, Math.floor((width * height) / 7500));
     const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      // Slow constant drift — the only thing moving these particles
       vx: (Math.random() - 0.5) * 0.25,
       vy: (Math.random() - 0.5) * 0.25,
       radius: Math.random() * 2.5 + 1.2,
     }));
 
-    const CONNECT_DIST = 130;        // particle-to-particle line distance
-    const CURSOR_CONNECT_DIST = 200; // how far the cursor can reach nodes
+    const CONNECT_DIST = 130;       
+    const CURSOR_CONNECT_DIST = 200; 
     let animationId;
 
     const handleResize = () => {
@@ -50,21 +48,17 @@ export default function Portfolio() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Update + draw particles — slow, constant, infinite drift
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Constant motion, no cursor physics
         p.x += p.vx;
         p.y += p.vy;
 
-        // Wrap around edges for infinite movement
         if (p.x < 0) p.x = width;
         if (p.x > width) p.x = 0;
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
 
-        // Glow particles that are near the cursor
         const dx = p.x - mouseRef.current.x;
         const dy = p.y - mouseRef.current.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -76,7 +70,6 @@ export default function Portfolio() {
         ctx.fill();
       }
 
-      // Particle-to-particle lines
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const a = particles[i];
@@ -97,7 +90,6 @@ export default function Portfolio() {
         }
       }
 
-      // Cursor-to-node lines — only when cursor is actually on screen
       if (
         mouseRef.current.x > 0 &&
         mouseRef.current.y > 0 &&
@@ -147,12 +139,12 @@ export default function Portfolio() {
       title: "Lazapee Payroll System",
       desc: "A Django-based payroll system with role-based access, automated periodic payslip generation, and full CRUD for employee records.",
       stack: ["Django", "Python", "Bootstrap", "CSS"],
-      image: "/lazapee.png",
+      image: "/lazapee_img.png",
     },
     {
       title: "FetchIt E-commerce Platform",
       tag: "Web Application",
-      desc: "A specialized e-commerce platform designed to centralize and streamline the procurement of pet supplies. Built a reliable shopping cart system that allows users to add, edit, and remove items in real-time without data errors. I also integrated secure session tracking to ensure a user’s items stay saved in their cart for up to a week, making it easy for them to return and finish their purchase.",
+      desc: "A specialized e-commerce platform designed to centralize and streamline the procurement of pet supplies. Built a reliable shopping cart system that allows users to add, edit, and remove items in real-time without data errors. I also integrated secure session tracking to ensure a user's items stay saved in their cart for up to a week, making it easy for them to return and finish their purchase.",
       stack: ["NodeJs", "React", "MySQL"],
       image: "/fetchit.png",
     },
@@ -274,11 +266,11 @@ export default function Portfolio() {
                 <div className="grid grid-cols-1 gap-8 p-12">
                   {/* Project Image */}
                   <div className="relative">
-                    <div className="aspect-video bg-slate-800 rounded-lg overflow-hidden max-w-3xl mx-auto w-full border border-slate-700 flex items-center justify-center">
+                    <div className="aspect-video bg-slate-800 rounded-lg overflow-hidden max-w-3xl mx-auto w-full border border-slate-700">
                       <img
                         src={projects[currentProject].image}
                         alt={projects[currentProject].title}
-                        className="max-w-full max-h-full object-contain"
+                        className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWUzNGVhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzlhYTZhYiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg==';
                         }}
@@ -292,7 +284,6 @@ export default function Portfolio() {
                       className="text-xs tracking-[0.3em] text-teal-300 mb-4"
                       style={{ fontFamily: "'JetBrains Mono', monospace" }}
                     >
-                      / {projects[currentProject].num}
                     </div>
 
                     <div
@@ -393,7 +384,7 @@ export default function Portfolio() {
                     <img
                       src={tech.image}
                       alt={tech.name}
-                      className="max-w-full max-h-full object-contain"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <div
