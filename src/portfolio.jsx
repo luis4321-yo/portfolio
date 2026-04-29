@@ -10,8 +10,19 @@ export default function Portfolio() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    const setCanvasSize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return { width: w, height: h };
+    };
+
+    let { width, height } = setCanvasSize();
 
     const particleCount = Math.min(280, Math.floor((width * height) / 7500));
     const particles = Array.from({ length: particleCount }, () => ({
@@ -22,13 +33,14 @@ export default function Portfolio() {
       radius: Math.random() * 2.5 + 1.2,
     }));
 
-    const CONNECT_DIST = 130;       
-    const CURSOR_CONNECT_DIST = 200; 
+    const CONNECT_DIST = 130;
+    const CURSOR_CONNECT_DIST = 200;
     let animationId;
 
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      const dims = setCanvasSize();
+      width = dims.width;
+      height = dims.height;
     };
 
     const handleMouseMove = (e) => {
@@ -155,7 +167,7 @@ export default function Portfolio() {
       {/* Node network canvas */}
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 w-full h-full pointer-events-none"
+        className="fixed inset-0 pointer-events-none"
         style={{ zIndex: 0 }}
       />
 
@@ -169,7 +181,7 @@ export default function Portfolio() {
         }}
       />
 
-      {/* Fixed Nav — stays at top regardless of scroll */}
+      {/* Fixed Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-8 md:px-16 py-6 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50">
         <div
           className="text-xl tracking-[0.3em] text-teal-300"
@@ -180,15 +192,9 @@ export default function Portfolio() {
           className="hidden md:flex gap-10 text-xs tracking-[0.25em] text-slate-400"
           style={{ fontFamily: "'JetBrains Mono', monospace" }}
         >
-          <a href="#work" className="hover:text-teal-300 transition-colors">
-            WORK
-          </a>
-          <a href="#about" className="hover:text-teal-300 transition-colors">
-            ABOUT
-          </a>
-          <a href="#contact" className="hover:text-teal-300 transition-colors">
-            CONTACT
-          </a>
+          <a href="#work" className="hover:text-teal-300 transition-colors">WORK</a>
+          <a href="#about" className="hover:text-teal-300 transition-colors">ABOUT</a>
+          <a href="#contact" className="hover:text-teal-300 transition-colors">CONTACT</a>
         </div>
       </nav>
 
@@ -254,7 +260,6 @@ export default function Portfolio() {
 
           {/* Project Carousel */}
           <div className="max-w-5xl mx-auto">
-            {/* Main Project Card */}
             <div className="relative mb-16">
               <div className="relative border border-slate-800 backdrop-blur-sm transition-all duration-500 bg-slate-900/50">
                 {/* Corner marks */}
@@ -270,7 +275,7 @@ export default function Portfolio() {
                       <img
                         src={projects[currentProject].image}
                         alt={projects[currentProject].title}
-                        className="w-full h-full object-contain"
+                        className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMWUzNGVhIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzlhYTZhYiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg==';
                         }}
