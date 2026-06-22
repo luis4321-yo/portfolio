@@ -380,6 +380,7 @@ export default function Portfolio() {
                 { name: "Django", image: "/images/django.png" },
                 { name: "HTML", image: "/images/html.png" },
                 { name: "CSS", image: "/images/css.png" },
+                { name: "Tailwind CSS", image: "/images/tailwind_css.png" },
               ].map((tech) => (
                 <div
                   key={tech.name}
